@@ -4,7 +4,7 @@
 
 ## live Site
 
-[live site]("https://ytmedia.streamlit.app/")
+[https://ytmedia.streamlit.app]("https://ytmedia.streamlit.app/")
 
 ## Setup the project
 
