@@ -37,6 +37,6 @@ if url != '':
         if downloaded:
             st.subheader("Download Complete")
             import subprocess
-            subprocess.run(["ls -Alsh"])
+            subprocess.run(["ls -Al"])
     else:
         st.subheader("Sorry, this video can not be downloaded")
