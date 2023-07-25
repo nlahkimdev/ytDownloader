@@ -14,16 +14,25 @@ if url != '':
     * Rating: {} 
     '''.format(yt.title, yt.length, yt.rating))
     video = yt.streams
+    resol = []
+    for stream in video:
+        if stream.resolution:
+            resol.append(stream.resolution)
+    res = list(set(resol))
     if len(video) > 0:
         downloaded, download_audio = False, False
         download_video = st.button("Download Video")
+        reso = st.sidebar.selectbox(
+            label='Select Video Resolution', options=res)
         if yt.streams.filter(only_audio=True):
             download_audio = st.button("Download Audio Only")
         if download_video:
-            video.get_lowest_resolution().download()
-            downloaded = True
+            if yt.streams.filter(resolution=reso):
+                video.filter(resolution=reso).first().download()
+                downloaded = True
         if download_audio:
-            audio = video.filter(only_audio=True).first().download()
+            audio = video.filter(
+                only_audio=True).first().download()
             downloaded = True
         if downloaded:
             st.subheader("Download Complete")
