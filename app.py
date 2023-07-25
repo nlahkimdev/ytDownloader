@@ -1,12 +1,16 @@
 import streamlit as st
 from pytube import YouTube
+from pytube.exceptions import VideoUnavailable
 
 st.title("YouTube Video Downloader")
 st.subheader("Enter the URL:")
 url = st.text_input(label='URL')
 # print('url', url)
 if url != '':
-    yt = YouTube(url)
+    try:
+        yt = YouTube(url)
+    except VideoUnavailable:
+        print(f'Video {url} is unavaialable, skipping.')
     st.image(yt.thumbnail_url, width=300)
     st.subheader('''
     {}
